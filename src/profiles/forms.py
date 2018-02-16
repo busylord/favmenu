@@ -35,7 +35,7 @@ class RegisterForm(forms.ModelForm):
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         #user.password = "asdfasd"
-        user.is_active = False
+        user.is_active = True
        
 
         if commit:

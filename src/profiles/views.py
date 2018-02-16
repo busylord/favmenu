@@ -35,7 +35,7 @@ class RegisterView(SuccessMessageMixin, CreateView):
     form_class = RegisterForm
     template_name = 'registration/register.html'
     success_url = '/'
-    success_message = "Your account was created successfully. Please check your email."
+    success_message = "Your account was created successfully."
 
     def dispatch(self, *args, **kwargs):
         # if self.request.user.is_authenticated():

@@ -25,7 +25,7 @@ class Profile(models.Model):
     followers         = models.ManyToManyField(User, related_name='is_following', blank=True) # user.is_following.all()
     #following         = models.ManyToManyField(User, related_name='following', blank=True) # user.following.all()
     activation_key    = models.CharField(max_length=120, blank=True, null=True)
-    activated         = models.BooleanField(default=False)
+    activated         = models.BooleanField(default=True)
     timestamp         = models.DateTimeField(auto_now_add=True)
     updated           = models.DateTimeField(auto_now=True)
 
@@ -39,21 +39,20 @@ class Profile(models.Model):
             self.activation_key = code_generator()# 'somekey' #gen key
             self.save()
             #path_ = reverse()
-            path_ = reverse('activate', kwargs={"code": self.activation_key})
-            full_path = "https://muypicky.com" + path_
+            path_ = reverse('activate', kwargs={'code': self.activation_key})
             subject = 'Activate Account'
             from_email = settings.DEFAULT_FROM_EMAIL
-            message = f'Activate your account here: {full_path}'
+            message = f'Activate your account here: {path_}'
             recipient_list = [self.user.email]
-            html_message = f'<p>Activate your account here: {full_path}</p>'
+            html_message = f'<p>Activate your account here: {path_}</p>'
             print(html_message)
-            sent_mail = send_mail(
-                            subject, 
-                            message, 
-                            from_email, 
-                            recipient_list, 
-                            fail_silently=False, 
-                            html_message=html_message)
+            # sent_mail = send_mail(
+            #                 subject, 
+            #                 message, 
+            #                 from_email, 
+            #                 recipient_list, 
+            #                 fail_silently=False, 
+            #                 html_message=html_message)
             sent_mail = False
             return sent_mail
 
