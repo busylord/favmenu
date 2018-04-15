@@ -2,6 +2,7 @@
 bin/
 include/
 myvenv/
+fmenv/
 pip-selfcheck.json
 
 # Byte-compiled / optimized / DLL files
